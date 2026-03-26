@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -18,285 +17,61 @@
     --text-dim: #9a8f7a;
     --glow: rgba(201,168,76,0.3);
   }
-
-- { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-background: var(–bg);
-color: var(–text);
-font-family: ‘Noto Serif JP’, serif;
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-align-items: center;
-overflow-x: hidden;
-}
-
-/* Stars background */
-body::before {
-content: ‘’;
-position: fixed;
-inset: 0;
-background-image:
-radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
-radial-gradient(1px 1px at 30% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
-radial-gradient(1px 1px at 50% 20%, rgba(255,255,255,0.5) 0%, transparent 100%),
-radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
-radial-gradient(1px 1px at 85% 10%, rgba(255,255,255,0.6) 0%, transparent 100%),
-radial-gradient(1px 1px at 20% 80%, rgba(255,255,255,0.4) 0%, transparent 100%),
-radial-gradient(1px 1px at 60% 85%, rgba(255,255,255,0.5) 0%, transparent 100%),
-radial-gradient(1px 1px at 90% 45%, rgba(255,255,255,0.3) 0%, transparent 100%),
-radial-gradient(2px 2px at 40% 70%, rgba(201,168,76,0.3) 0%, transparent 100%),
-radial-gradient(2px 2px at 75% 30%, rgba(155,111,208,0.3) 0%, transparent 100%);
-pointer-events: none;
-z-index: 0;
-}
-
-.container {
-position: relative;
-z-index: 1;
-width: 100%;
-max-width: 480px;
-padding: 40px 24px 60px;
-}
-
-header {
-text-align: center;
-margin-bottom: 40px;
-}
-
-.moon-icon {
-font-size: 48px;
-display: block;
-margin-bottom: 12px;
-filter: drop-shadow(0 0 12px var(–gold));
-animation: float 4s ease-in-out infinite;
-}
-
-@keyframes float {
-0%, 100% { transform: translateY(0); }
-50% { transform: translateY(-8px); }
-}
-
-h1 {
-font-family: ‘Cinzel’, serif;
-font-size: 22px;
-letter-spacing: 0.15em;
-color: var(–gold-light);
-text-shadow: 0 0 20px var(–glow);
-margin-bottom: 6px;
-}
-
-.subtitle {
-font-size: 12px;
-color: var(–text-dim);
-letter-spacing: 0.2em;
-}
-
-.divider {
-display: flex;
-align-items: center;
-gap: 12px;
-margin: 20px 0;
-}
-.divider::before, .divider::after {
-content: ‘’;
-flex: 1;
-height: 1px;
-background: linear-gradient(90deg, transparent, var(–gold), transparent);
-}
-.divider span { color: var(–gold); font-size: 14px; }
-
-.card {
-background: linear-gradient(135deg, rgba(17,13,30,0.9), rgba(30,20,50,0.9));
-border: 1px solid rgba(201,168,76,0.2);
-border-radius: 16px;
-padding: 28px 24px;
-backdrop-filter: blur(10px);
-box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
-}
-
-label {
-display: block;
-font-size: 12px;
-color: var(–gold);
-letter-spacing: 0.2em;
-margin-bottom: 8px;
-}
-
-input[type=“date”] {
-width: 100%;
-background: rgba(0,0,0,0.3);
-border: 1px solid rgba(201,168,76,0.3);
-border-radius: 10px;
-color: var(–text);
-font-family: ‘Noto Serif JP’, serif;
-font-size: 16px;
-padding: 14px 16px;
-outline: none;
-transition: border-color 0.3s, box-shadow 0.3s;
--webkit-appearance: none;
-color-scheme: dark;
-}
-
-input[type=“date”]:focus {
-border-color: var(–gold);
-box-shadow: 0 0 16px rgba(201,168,76,0.2);
-}
-
-button {
-width: 100%;
-margin-top: 20px;
-padding: 16px;
-background: linear-gradient(135deg, var(–purple), var(–gold));
-border: none;
-border-radius: 10px;
-color: white;
-font-family: ‘Noto Serif JP’, serif;
-font-size: 15px;
-font-weight: 700;
-letter-spacing: 0.15em;
-cursor: pointer;
-transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
-box-shadow: 0 4px 20px rgba(107,63,160,0.4);
-}
-
-button:hover {
-opacity: 0.9;
-transform: translateY(-2px);
-box-shadow: 0 8px 30px rgba(107,63,160,0.6);
-}
-button:active { transform: translateY(0); }
-button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-/* Result */
-#result {
-margin-top: 28px;
-display: none;
-animation: fadeInUp 0.6s ease forwards;
-}
-
-@keyframes fadeInUp {
-from { opacity: 0; transform: translateY(20px); }
-to { opacity: 1; transform: translateY(0); }
-}
-
-.destiny-number {
-text-align: center;
-padding: 24px;
-background: radial-gradient(circle at center, rgba(107,63,160,0.3), transparent 70%);
-border: 1px solid rgba(201,168,76,0.3);
-border-radius: 12px;
-margin-bottom: 20px;
-}
-
-.destiny-label {
-font-size: 11px;
-color: var(–text-dim);
-letter-spacing: 0.25em;
-margin-bottom: 8px;
-}
-
-.destiny-num {
-font-family: ‘Cinzel’, serif;
-font-size: 64px;
-color: var(–gold-light);
-text-shadow: 0 0 30px var(–glow), 0 0 60px rgba(201,168,76,0.2);
-line-height: 1;
-margin-bottom: 6px;
-}
-
-.destiny-name {
-font-size: 13px;
-color: var(–purple-light);
-letter-spacing: 0.1em;
-}
-
-.fortune-title {
-font-size: 11px;
-color: var(–gold);
-letter-spacing: 0.25em;
-margin-bottom: 16px;
-text-align: center;
-}
-
-.fortune-text {
-font-size: 14px;
-line-height: 2;
-color: var(–text);
-text-align: justify;
-white-space: pre-wrap;
-}
-
-.categories {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 12px;
-margin-top: 20px;
-}
-
-.cat-item {
-background: rgba(0,0,0,0.3);
-border: 1px solid rgba(201,168,76,0.15);
-border-radius: 10px;
-padding: 14px 12px;
-text-align: center;
-}
-
-.cat-icon { font-size: 22px; margin-bottom: 6px; }
-.cat-name { font-size: 10px; color: var(–text-dim); letter-spacing: 0.15em; margin-bottom: 6px; }
-.cat-stars { color: var(–gold); font-size: 14px; }
-
-.lucky {
-margin-top: 20px;
-padding: 16px;
-background: rgba(201,168,76,0.05);
-border: 1px solid rgba(201,168,76,0.2);
-border-radius: 10px;
-font-size: 13px;
-color: var(–text-dim);
-text-align: center;
-line-height: 1.8;
-}
-
-.lucky span { color: var(–gold-light); }
-
-.loading {
-text-align: center;
-padding: 32px;
-color: var(–text-dim);
-font-size: 13px;
-letter-spacing: 0.15em;
-}
-
-.loading::after {
-content: ‘’;
-display: inline-block;
-width: 20px;
-height: 20px;
-border: 2px solid rgba(201,168,76,0.3);
-border-top-color: var(–gold);
-border-radius: 50%;
-animation: spin 0.8s linear infinite;
-margin-left: 10px;
-vertical-align: middle;
-}
-
-@keyframes spin {
-to { transform: rotate(360deg); }
-}
-
-.share-hint {
-margin-top: 24px;
-text-align: center;
-font-size: 11px;
-color: var(–text-dim);
-letter-spacing: 0.15em;
-padding: 12px;
-border-top: 1px solid rgba(255,255,255,0.05);
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif JP', serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 20%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 10%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(2px 2px at 40% 70%, rgba(201,168,76,0.3) 0%, transparent 100%),
+      radial-gradient(2px 2px at 75% 30%, rgba(155,111,208,0.3) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .container { position: relative; z-index: 1; width: 100%; max-width: 480px; padding: 40px 24px 60px; }
+  header { text-align: center; margin-bottom: 40px; }
+  .moon-icon { font-size: 48px; display: block; margin-bottom: 12px; filter: drop-shadow(0 0 12px var(--gold)); animation: float 4s ease-in-out infinite; }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  h1 { font-family: 'Cinzel', serif; font-size: 22px; letter-spacing: 0.15em; color: var(--gold-light); text-shadow: 0 0 20px var(--glow); margin-bottom: 6px; }
+  .subtitle { font-size: 12px; color: var(--text-dim); letter-spacing: 0.2em; }
+  .card { background: linear-gradient(135deg, rgba(17,13,30,0.9), rgba(30,20,50,0.9)); border: 1px solid rgba(201,168,76,0.2); border-radius: 16px; padding: 28px 24px; backdrop-filter: blur(10px); box-shadow: 0 8px 40px rgba(0,0,0,0.5); }
+  label { display: block; font-size: 12px; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 8px; }
+  input[type="date"] { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(201,168,76,0.3); border-radius: 10px; color: var(--text); font-family: 'Noto Serif JP', serif; font-size: 16px; padding: 14px 16px; outline: none; -webkit-appearance: none; color-scheme: dark; }
+  button { width: 100%; margin-top: 20px; padding: 16px; background: linear-gradient(135deg, var(--purple), var(--gold)); border: none; border-radius: 10px; color: white; font-family: 'Noto Serif JP', serif; font-size: 15px; font-weight: 700; letter-spacing: 0.15em; cursor: pointer; box-shadow: 0 4px 20px rgba(107,63,160,0.4); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  #result { margin-top: 28px; display: none; animation: fadeInUp 0.6s ease forwards; }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .destiny-number { text-align: center; padding: 24px; background: radial-gradient(circle at center, rgba(107,63,160,0.3), transparent 70%); border: 1px solid rgba(201,168,76,0.3); border-radius: 12px; margin-bottom: 20px; }
+  .destiny-label { font-size: 11px; color: var(--text-dim); letter-spacing: 0.25em; margin-bottom: 8px; }
+  .destiny-num { font-family: 'Cinzel', serif; font-size: 64px; color: var(--gold-light); text-shadow: 0 0 30px var(--glow); line-height: 1; margin-bottom: 6px; }
+  .destiny-name { font-size: 13px; color: var(--purple-light); letter-spacing: 0.1em; }
+  .fortune-title { font-size: 11px; color: var(--gold); letter-spacing: 0.25em; margin-bottom: 16px; text-align: center; }
+  .fortune-text { font-size: 14px; line-height: 2; color: var(--text); text-align: justify; white-space: pre-wrap; }
+  .categories { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+  .cat-item { background: rgba(0,0,0,0.3); border: 1px solid rgba(201,168,76,0.15); border-radius: 10px; padding: 14px 12px; text-align: center; }
+  .cat-icon { font-size: 22px; margin-bottom: 6px; }
+  .cat-name { font-size: 10px; color: var(--text-dim); letter-spacing: 0.15em; margin-bottom: 6px; }
+  .cat-stars { color: var(--gold); font-size: 14px; }
+  .lucky { margin-top: 20px; padding: 16px; background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; font-size: 13px; color: var(--text-dim); text-align: center; line-height: 1.8; }
+  .lucky span { color: var(--gold-light); }
+  .loading { text-align: center; padding: 32px; color: var(--text-dim); font-size: 13px; }
+  .share-hint { margin-top: 24px; text-align: center; font-size: 11px; color: var(--text-dim); letter-spacing: 0.15em; padding: 12px; border-top: 1px solid rgba(255,255,255,0.05); }
 </style>
-
 </head>
 <body>
 <div class="container">
@@ -305,139 +80,50 @@ border-top: 1px solid rgba(255,255,255,0.05);
     <h1>NUMEROLOGY</h1>
     <p class="subtitle">数秘術 · 今日の運勢</p>
   </header>
-
   <div class="card">
     <label>✦ 生年月日を入力</label>
     <input type="date" id="birthdate" max="2010-12-31" min="1940-01-01">
     <button id="btn" onclick="getFortune()">今日の運勢を占う</button>
   </div>
-
   <div id="result"></div>
 </div>
-
 <script>
 function calcDestinyNumber(dateStr) {
   const digits = dateStr.replace(/-/g, '').split('').map(Number);
   let sum = digits.reduce((a, b) => a + b, 0);
-  while (sum > 9) {
-    sum = String(sum).split('').map(Number).reduce((a, b) => a + b, 0);
-  }
+  while (sum > 9) { sum = String(sum).split('').map(Number).reduce((a, b) => a + b, 0); }
   return sum || 9;
 }
-
-const destinyNames = {
-  1: "リーダー", 2: "調和者", 3: "クリエイター",
-  4: "建設者", 5: "自由人", 6: "愛情家",
-  7: "探求者", 8: "達成者", 9: "賢者"
-};
-
-function getToday() {
-  const d = new Date();
-  return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
-}
-
+const destinyNames = { 1:"リーダー", 2:"調和者", 3:"クリエイター", 4:"建設者", 5:"自由人", 6:"愛情家", 7:"探求者", 8:"達成者", 9:"賢者" };
+function getToday() { const d = new Date(); return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`; }
 async function getFortune() {
+  const ua = navigator.userAgent;
+  if (ua.indexOf("Instagram") > -1) {
+    document.getElementById("result").style.display = "block";
+    document.getElementById("result").innerHTML = '<div class="card" style="text-align:center;padding:24px;"><div style="font-size:32px;margin-bottom:16px;">📱</div><div style="color:#c9a84c;font-size:14px;margin-bottom:12px;">Safariで開いてください</div><div style="font-size:13px;color:#9a8f7a;line-height:2;">右上の「…」→「Safariで開く」をタップ！</div></div>';
+    return;
+  }
   const input = document.getElementById('birthdate').value;
-  if (!input) { alert('生年月日を入力してください'); return; }
-
+  if (!input) { document.getElementById('result').style.display='block'; document.getElementById('result').innerHTML='<div class="card" style="text-align:center;padding:20px;color:#c9a84c;">生年月日を入力してください🔮</div>'; return; }
   const btn = document.getElementById('btn');
-  btn.disabled = true;
-  btn.textContent = '占い中...';
-
+  btn.disabled = true; btn.textContent = '占い中...';
   const destinyNum = calcDestinyNumber(input);
   const today = getToday();
-
   document.getElementById('result').style.display = 'block';
-  document.getElementById('result').innerHTML = `<div class="loading">星の導きを読み解いています</div>`;
-
-  const prompt = `あなたは数秘術の占い師です。
-今日は${today}です。
-この人の運命数は${destinyNum}（${destinyNames[destinyNum]}）です。
-
-以下のJSON形式のみで回答してください。説明や前置きは不要です：
-{
-  "overall": "今日の総合運（2〜3文、具体的で前向きに）",
-  "love": 1〜5の数字,
-  "work": 1〜5の数字,
-  "money": 1〜5の数字,
-  "health": 1〜5の数字,
-  "lucky_color": "ラッキーカラー",
-  "lucky_item": "ラッキーアイテム",
-  "lucky_number": ラッキーナンバー（1〜99の数字）,
-  "advice": "今日のひとことアドバイス（簡潔に）"
-}`;
-
+  document.getElementById('result').innerHTML = '<div class="loading">星の導きを読み解いています✨</div>';
+  const prompt = `あなたは数秘術の占い師です。今日は${today}です。この人の運命数は${destinyNum}（${destinyNames[destinyNum]}）です。以下のJSON形式のみで回答してください：{"overall":"今日の総合運（2〜3文）","love":1〜5の数字,"work":1〜5の数字,"money":1〜5の数字,"health":1〜5の数字,"lucky_color":"ラッキーカラー","lucky_item":"ラッキーアイテム","lucky_number":ラッキーナンバー,"advice":"ひとことアドバイス"}`;
   try {
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 1000,
-        messages: [{ role: "user", content: prompt }]
-      })
-    });
-
+    const res = await fetch("https://api.anthropic.com/v1/messages", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({ model:"claude-sonnet-4-20250514", max_tokens:1000, messages:[{role:"user",content:prompt}] }) });
     const data = await res.json();
-    const raw = data.content.map(i => i.text || '').join('');
-    const clean = raw.replace(/```json|```/g, '').trim();
-    const fortune = JSON.parse(clean);
-
-    const stars = n => '★'.repeat(n) + '☆'.repeat(5 - n);
-
-    document.getElementById('result').innerHTML = `
-      <div class="destiny-number">
-        <div class="destiny-label">あなたの運命数</div>
-        <div class="destiny-num">${destinyNum}</div>
-        <div class="destiny-name">${destinyNames[destinyNum]}</div>
-      </div>
-
-      <div class="card">
-        <div class="fortune-title">✦ ${today}の運勢 ✦</div>
-        <div class="fortune-text">${fortune.overall}</div>
-
-        <div class="categories">
-          <div class="cat-item">
-            <div class="cat-icon">💕</div>
-            <div class="cat-name">恋 愛</div>
-            <div class="cat-stars">${stars(fortune.love)}</div>
-          </div>
-          <div class="cat-item">
-            <div class="cat-icon">💼</div>
-            <div class="cat-name">仕 事</div>
-            <div class="cat-stars">${stars(fortune.work)}</div>
-          </div>
-          <div class="cat-item">
-            <div class="cat-icon">💰</div>
-            <div class="cat-name">金 運</div>
-            <div class="cat-stars">${stars(fortune.money)}</div>
-          </div>
-          <div class="cat-item">
-            <div class="cat-icon">🌿</div>
-            <div class="cat-name">健 康</div>
-            <div class="cat-stars">${stars(fortune.health)}</div>
-          </div>
-        </div>
-
-        <div class="lucky">
-          🎨 ラッキーカラー：<span>${fortune.lucky_color}</span>　
-          ✨ ラッキーアイテム：<span>${fortune.lucky_item}</span>　
-          🔢 ラッキーナンバー：<span>${fortune.lucky_number}</span>
-          <br><br>
-          💫 <span>${fortune.advice}</span>
-        </div>
-      </div>
-
-      <div class="share-hint">💬 コメントで感想を教えてね</div>
-    `;
-  } catch (e) {
-    document.getElementById('result').innerHTML = `<div class="loading">エラーが発生しました。もう一度お試しください。</div>`;
+    const raw = data.content.map(i => i.text||'').join('');
+    const fortune = JSON.parse(raw.replace(/```json|```/g,'').trim());
+    const stars = n => '★'.repeat(n)+'☆'.repeat(5-n);
+    document.getElementById('result').innerHTML = `<div class="destiny-number"><div class="destiny-label">あなたの運命数</div><div class="destiny-num">${destinyNum}</div><div class="destiny-name">${destinyNames[destinyNum]}</div></div><div class="card"><div class="fortune-title">✦ ${today}の運勢 ✦</div><div class="fortune-text">${fortune.overall}</div><div class="categories"><div class="cat-item"><div class="cat-icon">💕</div><div class="cat-name">恋 愛</div><div class="cat-stars">${stars(fortune.love)}</div></div><div class="cat-item"><div class="cat-icon">💼</div><div class="cat-name">仕 事</div><div class="cat-stars">${stars(fortune.work)}</div></div><div class="cat-item"><div class="cat-icon">💰</div><div class="cat-name">金 運</div><div class="cat-stars">${stars(fortune.money)}</div></div><div class="cat-item"><div class="cat-icon">🌿</div><div class="cat-name">健 康</div><div class="cat-stars">${stars(fortune.health)}</div></div></div><div class="lucky">🎨 ラッキーカラー：<span>${fortune.lucky_color}</span>　✨ ラッキーアイテム：<span>${fortune.lucky_item}</span>　🔢 ラッキーナンバー：<span>${fortune.lucky_number}</span><br><br>💫 <span>${fortune.advice}</span></div></div><div class="share-hint">💬 コメントで感想を教えてね</div>`;
+  } catch(e) {
+    document.getElementById('result').innerHTML = '<div class="loading">エラーが発生しました。もう一度お試しください。</div>';
   }
-
-  btn.disabled = false;
-  btn.textContent = '今日の運勢を占う';
+  btn.disabled = false; btn.textContent = '今日の運勢を占う';
 }
 </script>
-
 </body>
 </html>
